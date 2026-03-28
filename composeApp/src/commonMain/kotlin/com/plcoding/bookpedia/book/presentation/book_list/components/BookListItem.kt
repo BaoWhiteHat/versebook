@@ -13,8 +13,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +38,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import cmp_bookpedia.composeapp.generated.resources.Res
 import cmp_bookpedia.composeapp.generated.resources.book_error_2
+import com.plcoding.bookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
+import kotlin.math.round
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun BookListItem(
@@ -52,7 +61,9 @@ fun BookListItem(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
-                .height(IntrinsicSize.Min)
+                .height(IntrinsicSize.Min),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Box(
                 modifier = Modifier
@@ -127,12 +138,24 @@ fun BookListItem(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = rating.toString(),
-                            style = MaterialTheme.typography.bodyLarge,
+                            text = "${round(rating * 10) / 10.0}",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = null,
+                            tint = SandYellow
                         )
                     }
                 }
             }
+            // Icon design for arrow
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(36.dp)
+            )
         }
     }
 }
